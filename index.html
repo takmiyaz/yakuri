@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医薬品情報リスト（完全版）</title>
+    <style>
+        /* Modern CSS Reset & Base Styles */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        :root {
+            --primary-color: #0d6efd;
+            --light-gray: #f8f9fa;
+            --border-color: #dee2e6;
+            --text-color: #212529;
+            --text-muted: #6c757d;
+        }
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            line-height: 1.6;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 960px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            margin: 0 0 1rem 0;
+            line-height: 1.2;
+            font-weight: 600;
+        }
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+        h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+        }
+        h3 {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-top: 2rem;
+        }
+        h4 {
+            font-size: 1.25rem;
+            margin: 0;
+            font-weight: 700;
+        }
+        h5 {
+            font-size: 1.1rem;
+            color: #495057;
+            margin-top: 1rem;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 0.75rem;
+        }
+        p {
+            margin: 0.5rem 0 1rem 0;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .control-btn {
+            background-color: #fff;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .control-btn:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        /* Components: Animated Details/Summary */
+        .drug-card {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        summary {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            outline: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s ease-in-out;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #f1f3f5;
+        }
+        summary::-webkit-details-marker {
+            display: none; /* Hide default marker */
+        }
+        summary::after {
+            content: '＋';
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+        details[open] > summary {
+             border-bottom: 1px solid var(--border-color);
+        }
+        details[open] > summary::after {
+            transform: rotate(45deg);
+        }
+        .details-content {
+            padding: 0 1.5rem;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            max-height: 0;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>薬まとめ</h1>
+            <div class="controls">
+                <button id="open-all" class="control-btn">すべて開く</button>
+                <button id="close-all" class="control-btn">すべて閉じる</button>
+            </div>
+        </header>
+
+        <main>
+            <section>
+                <h2>循環器系に作用する薬物</h2>
+                
+                <h3>1. 抗血栓薬</h3>
+                <article class="drug-card"><details><summary><h4>エドキサバン</h4></summary><div class="details-content"><h5>作用機序</h5><p>血液凝固カスケードの中心的な役割を担う活性化第X因子（Xa）を選択的かつ直接的に阻害する。これにより、プロトロンビンのトロンビンへの変換を抑制し、強力な抗凝固作用を示す直接経口抗凝固薬（DOAC）である。</p><h5>適応疾患</h5><p>非弁膜症性心房細動における虚血性脳卒中及び全身性塞栓症の発症抑制、静脈血栓塞栓症（深部静脈血栓症及び肺血栓塞栓症）の治療及び再発抑制。</p><h5>副作用</h5><p>各種の出血（消化管出血、鼻出血、皮下出血など）、肝機能障害、貧血。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>ダビガトラン</h4></summary><div class="details-content"><h5>作用機序</h5><p>血液凝固の最終段階でフィブリン形成を触媒するトロンビン（第IIa因子）を直接的に阻害し、抗凝固作用を発揮するDOACである。</p><h5>適応疾患</h5><p>非弁膜症性心房細動における虚血性脳卒中及び全身性塞栓症の発症抑制。</p><h5>副作用</h5><p>出血、消化器症状（特に胃部不快感、消化不良）。特異的中和剤（イダルシズマブ）が存在する。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>ワルファリン</h4></summary><div class="details-content"><h5>作用機序</h5><p>肝臓におけるビタミンKの働きを阻害し、ビタミンK依存性凝固因子（第II, VII, IX, X因子）の産生を抑制することで抗凝固作用を発揮するビタミンK拮抗薬である。</p><h5>適応疾患</h5><p>心房細動、機械弁置換術後、静脈血栓塞栓症などにおける血栓塞栓症の治療および予防。</p><h5>副作用</h5><p>重篤な出血（脳出血、消化管出血など）。ビタミンK含有食品（納豆、青汁など）や他剤との相互作用が多く、定期的な血液モニタリング（PT-INR）が必須である。皮膚壊死も稀に報告される。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>アルテプラーゼ</h4></summary><div class="details-content"><h5>作用機序</h5><p>遺伝子組換え組織プラスミノーゲン活性化因子（t-PA）製剤。血栓中のフィブリンに結合し、血栓内のプラスミノーゲンをプラスミンに変換する。産生されたプラスミンがフィブリンを分解し、血栓を溶解させる（血栓溶解療法）。</p><h5>適応疾患</h5><p>虚血性脳血管障害急性期（発症4.5時間以内）、急性心筋梗塞における冠動脈血栓の溶解。</p><h5>副作用</h5><p>重篤な出血（特に脳出血）、脳浮腫、再灌流障害による不整脈。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>アスピリン（低用量）</h4></summary><div class="details-content"><h5>作用機序</h5><p>血小板のシクロオキシゲナーゼ-1（COX-1）を非可逆的にアセチル化し、血小板凝集を促進するトロンボキサンA₂の産生を抑制することで抗血小板作用を示す。</p><h5>適応疾患</h5><p>狭心症、心筋梗塞、虚血性脳血管障害における血栓・塞栓形成の抑制。川崎病。</p><h5>副作用</h5><p>消化管粘膜障害（胃潰瘍、消化管出血）、喘息発作の誘発（アスピリン喘息）、出血傾向。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>クロピドグレル</h4></summary><div class="details-content"><h5>作用機序</h5><p>血小板表面のADP受容体（P2Y₁₂）を非可逆的に阻害し、ADPを介した血小板の活性化および凝集を抑制する。肝臓で活性体に変換されるプロドラッグである。</p><h5>適応疾患</h5><p>虚血性脳血管障害の再発予防、経皮的冠動脈形成術（PCI）施行後などの末梢動脈疾患における血栓・塞栓形成の抑制。</p><h5>副作用</h5><p>出血、肝機能障害、血栓性血小板減少性紫斑病（TTP）、発疹。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>シロスタゾール</h4></summary><div class="details-content"><h5>作用機序</h5><p>ホスホジエステラーゼIII（PDE3）を選択的に阻害する。これにより血小板や血管平滑筋のcAMP濃度が上昇し、血小板凝集抑制作用と血管拡張作用を発揮する。</p><h5>適応疾患</h5><p>慢性動脈閉塞症に基づく潰瘍、疼痛及び冷感などの虚血性諸症状の改善。脳梗塞（心原性脳塞栓症を除く）再発抑制。</p><h5>副作用</h5><p>頭痛、動悸、頻脈、発疹、出血。心不全患者には禁忌である。</p></div></details></article>
+                
+                <h3>2. 降圧薬・心不全治療薬</h3>
+                <article class="drug-card"><details><summary><h4>カプトプリル</h4></summary><div class="details-content"><h5>作用機序</h5><p>アンジオテンシン変換酵素（ACE）を阻害し、昇圧物質アンジオテンシンIIの産生を抑制すると同時に、降圧物質ブラジキニンの分解を抑制することで降圧作用を示す。SH基を持つのが特徴である。</p><h5>適応疾患</h5><p>本態性高血圧症、腎性高血圧症、重症高血圧症。</p><h5>副作用</h5><p>頑固な空咳、高カリウム血症、味覚異常、発疹。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>エナラプリル</h4></summary><div class="details-content"><h5>作用機序</h5><p>ACE阻害薬。体内で活性体エナラプリラートに変換されるプロドラッグであり、アンジオテンシンIIの産生を抑制して降圧作用を示す。</p><h5>適応疾患</h5><p>本態性高血圧症、腎性高血圧症、慢性心不全。</p><h5>副作用</h5><p>空咳、めまい、高カリウム血症、血管浮腫。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>デラプリル</h4></summary><div class="details-content"><h5>作用機序</h5><p>ACE阻害薬。エナラプリル同様、体内で活性体に変換されるプロドラッグであり、アンジオテンシンII産生を抑制することで降圧作用を示す。</p><h5>適応疾患</h5><p>高血圧症、腎実質性高血圧症。</p><h5>副作用</h5><p>空咳、めまい、発疹、高カリウム血症。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>バルサルタン</h4></summary><div class="details-content"><h5>作用機序</h5><p>アンジオテンシンII受容体（AT₁受容体）を競合的に遮断することで、アンジオテンシンIIの強力な血管収縮作用やアルドステロン分泌作用を抑制し、降圧させる。</p><h5>適応疾患</h5><p>高血圧症。</p><h5>副作用</h5><p>めまい、頭痛、高カリウム血症。ACE阻害薬と異なり空咳は稀である。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>ロサルタン</h4></summary><div class="details-content"><h5>作用機序</h5><p>ARB。アンジオテンシンIIのAT₁受容体を遮断して降圧作用を示す。また、血中尿酸値を低下させる作用も併せ持つ。</p><h5>適応疾患</h5><p>高血圧症、高血圧及び蛋白尿を伴う2型糖尿病における糖尿病性腎症。</p><h5>副作用</h5><p>めまい、高カリウム血症、肝機能障害。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>プロプラノロール</h4></summary><div class="details-content"><h5>作用機序</h5><p>β₁及びβ₂受容体を非選択的に遮断する。心臓のβ₁受容体を遮断して心拍数や心拍出量を減少させて降圧し、気管支のβ₂受容体も遮断する。</p><h5>適応疾患</h5><p>本態性高血圧症、狭心症、頻脈性不整脈、片頭痛発作の発症抑制。</p><h5>副作用</h5><p>徐脈、心不全、疲労感、気管支喘息の悪化（β₂遮断作用による）、血糖値への影響。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>ジギタリス</h4></summary><div class="details-content"><h5>作用機序</h5><p>心筋細胞のNa⁺/K⁺-ATPaseを阻害する。これにより細胞内Na⁺濃度が上昇し、Na⁺/Ca²⁺交換系を介して細胞内Ca²⁺濃度が上昇し、心筋収縮力を増強させる。また、迷走神経を刺激し房室結節の伝導を抑制する。</p><h5>適応疾患</h5><p>うっ血性心不全、心房細動・心房粗動による頻脈。</p><h5>副作用</h5><p>治療域と中毒域が近いため注意が必要。不整脈（心室性期外収縮など）、消化器症状（悪心、嘔吐）、視覚異常（黄視症など）。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>利尿薬（クラス全般）</h4></summary><div class="details-content"><h5>作用機序</h5><p>腎臓の尿細管に作用し、Na⁺や水分の再吸収を抑制することで尿量を増加させ、循環血漿量を減少させて降圧効果や心臓への負荷軽減効果を示す。作用部位によりサイアザイド系、ループ利尿薬、カリウム保持性利尿薬などに分類される。</p><h5>適応疾患</h5><p>高血圧症、心性浮腫（うっ血性心不全）、腎性浮腫、肝性浮腫。</p><h5>副作用</h5><p>脱水、電解質異常（低カリウム血症、低ナトリウム血症、高カリウム血症など）、高尿酸血症、耐糖能異常。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>ブメタニド</h4></summary><div class="details-content"><h5>作用機序</h5><p>ヘンレ係蹄上行脚に作用するループ利尿薬であり、Na⁺-K⁺-2Cl⁻共輸送体を阻害することで、強力かつ速やかな利尿作用を示す。</p><h5>適応疾患</h5><p>心性浮腫、腎性浮腫、肝性浮腫。</p><h5>副作用</h5><p>脱水、電解質異常（特に低カリウム血症）、聴覚障害（稀）。</p></div></details></article>
+
+                <h3>3. 肺高血圧症治療薬</h3>
+                <article class="drug-card"><details><summary><h4>PGI₂製剤 / 選択的PGI₂受容体作動薬</h4></summary><div class="details-content"><h5>作用機序</h5><p>血管平滑筋細胞のPGI₂受容体を刺激することでcAMP濃度を上昇させ、強力な血管拡張作用を発揮する。血小板凝集抑制作用も併せ持つ。</p><h5>適応疾患</h5><p>肺動脈性肺高血圧症（PAH）。</p><h5>副作用</h5><p>頭痛、顔面紅潮、顎痛、下痢、四肢痛、低血圧。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>エンドセリン受容体拮抗薬</h4></summary><div class="details-content"><h5>作用機序</h5><p>強力な血管収縮物質であるエンドセリン-1（ET-1）が血管平滑筋細胞のETᴀ及びETʙ受容体に結合するのを阻害し、血管収縮を抑制する。</p><h5>適応疾患</h5><p>肺動脈性肺高血圧症（PAH）。</p><h5>副作用</h5><p>肝機能障害（定期的な肝機能検査が必須）、貧血、浮腫・体液貯留、頭痛。催奇形性があるため妊婦には禁忌。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>PDE5阻害薬</h4></summary><div class="details-content"><h5>作用機序</h5><p>血管平滑筋細胞内でのPDE5によるcGMPの分解を抑制することで細胞内のcGMP濃度を増加させ、一酸化窒素（NO）による血管拡張作用を増強する。</p><h5>適応疾患</h5><p>肺動脈性肺高血圧症（PAH）、勃起不全。</p><h5>副作用</h5><p>頭痛、ほてり、消化不良、視覚異常（青みがかって見えるなど）。硝酸薬との併用は禁忌。</p></div></details></article>
+                
+                <h3>4. 脂質異常症治療薬</h3>
+                 <article class="drug-card"><details><summary><h4>プラバスタチン</h4></summary><div class="details-content"><h5>作用機序</h5><p>肝臓におけるコレステロール生合成の律速酵素であるHMG-CoA還元酵素を競合的に阻害する。スタチン系の中では親水性が高く、主に肝臓に選択的に作用する。</p><h5>適応疾患</h5><p>高脂血症、家族性高コレステロール血症。</p><h5>副作用</h5><p>横紋筋融解症（頻度は低い）、肝機能障害、発疹、消化器症状。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>アトルバスタチン</h4></summary><div class="details-content"><h5>作用機序</h5><p>HMG-CoA還元酵素を強力に阻害する。LDLコレステロール低下作用が強く、中性脂肪を低下させる効果も比較的高い。</p><h5>適応疾患</h5><p>高コレステロール血症、家族性高コレステロール血症。</p><h5>副作用</h5><p>横紋筋融解症、肝機能障害、筋肉痛、消化器症状。</p></div></details></article>
+
+                <h3>5. 腎性貧血治療薬</h3>
+                <article class="drug-card"><details><summary><h4>低酸素誘導因子プロリル酸化酵素（HIF-PH）阻害薬</h4></summary><div class="details-content"><h5>作用機序</h5><p>通常は酸素が十分あると分解される低酸素誘導因子（HIF）を安定化させる。HIFはエリスロポエチン（EPO）産生や鉄代謝に関わる遺伝子を活性化するため、結果として内因性のEPO産生を促し、赤血球産生を亢進させる。</p><h5>適応疾患</h5><p>腎性貧血。</p><h5>副作用</h5><p>血栓塞栓症、高血圧、網膜出血。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>モリデュスタット</h4></summary><div class="details-content"><h5>作用機序</h5><p>HIF-PH阻害薬の一つ。HIFの分解を抑制し安定化させることで、内因性エリスロポエチン産生を高め、腎性貧血を改善する。</p><h5>適応疾患</h5><p>腎性貧血。</p><h5>副作用</h5><p>血栓塞栓症（深部静脈血栓症、肺塞栓症など）、高血圧。</p></div></details></article>
+
+            </section>
+            
+            <section>
+                <h2>呼吸器系に作用する薬物</h2>
+                <article class="drug-card"><details><summary><h4>サルブタモール</h4></summary><div class="details-content"><h5>作用機序</h5><p>気管支平滑筋に存在するβ₂アドレナリン受容体を選択的に刺激し、アデニル酸シクラーゼを活性化させる。これにより細胞内cAMP濃度が上昇し、気管支を拡張させる。短時間作用性。</p><h5>適応疾患</h5><p>気管支喘息（発作治療）、慢性気管支炎、肺気腫。</p><h5>副作用</h5><p>心悸亢進（動悸）、頻脈、手指の振戦（ふるえ）、頭痛、血清カリウム値の低下。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>ピルフェニドン</h4></summary><div class="details-content"><h5>作用機序</h5><p>詳細な機序は完全には解明されていないが、線維化に関わるTGF-βやTNF-αなどのサイトカイン産生を抑制することで、抗線維化作用、抗炎症作用、抗酸化作用を発揮すると考えられている。</p><h5>適応疾患</h5><p>特発性肺線維症（IPF）。</p><h5>副作用</h5><p>光線過敏症（日光による皮膚障害）、食欲不振、胃部不快感、肝機能障害。</p></div></details></article>
+            </section>
+
+            <section>
+                <h2>骨粗鬆症に作用する薬物</h2>
+                <article class="drug-card"><details><summary><h4>ラロキシフェン</h4></summary><div class="details-content"><h5>作用機序</h5><p>選択的エストロゲン受容体モジュレーター（SERM）。骨ではエストロゲン様作用を示し破骨細胞の働きを抑制して骨吸収を防ぐが、乳腺や子宮には抗エストロゲン作用を示す。</p><h5>適応疾患</h5><p>閉経後骨粗鬆症。</p><h5>副作用</h5><p>静脈血栓塞栓症（深部静脈血栓症、肺塞栓症など）、ほてり、足のけいれん。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>ビスホスホネート薬</h4></summary><div class="details-content"><h5>作用機序</h5><p>骨の成分であるハイドロキシアパタイトに結合し、骨を壊す破骨細胞の働きを抑制したり、細胞死を誘導したりすることで強力に骨吸収を抑制する。</p><h5>適応疾患</h5><p>骨粗鬆症、悪性腫瘍による高カルシウム血症や多発性骨髄腫による骨病変。</p><h5>副作用</h5><p>消化管障害（逆流性食道炎など）、顎骨壊死、非定型大腿骨骨折。服用方法の遵守が重要である。</p></div></details></article>
+            </section>
+            
+            <section>
+                <h2>炎症・免疫・アレルギー・リウマチ・痛風に作用する薬物</h2>
+                <article class="drug-card"><details><summary><h4>ロキソプロフェン</h4></summary><div class="details-content"><h5>作用機序</h5><p>プロスタグランジンの生合成酵素であるシクロオキシゲナーゼ（COX）を非選択的に阻害する。これによりプロスタグランジン産生を抑制し、解熱・鎮痛・抗炎症作用を示す。体内で活性体に変換されるプロドラッグである。</p><h5>適応疾患</h5><p>関節リウマチ・変形性関節症などの炎症・疼痛の寛解、手術後・抜歯後などの鎮痛・消炎、急性上気道炎の解熱・鎮痛。</p><h5>副作用</h5><p>消化管障害（胃部不快感、胃痛、潰瘍）、腎機能障害、浮腫、発疹。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>コルヒチン</h4></summary><div class="details-content"><h5>作用機序</h5><p>痛風発作時に、関節内に析出した尿酸塩結晶に反応する好中球の微小管形成を阻害する。これにより、好中球の遊走や貪食能を抑制し、炎症反応を鎮静化させる。</p><h5>適応疾患</h5><p>痛風発作の緩解及び予防、家族性地中海熱。</p><h5>副作用</h5><p>消化器症状（下痢、腹痛、嘔吐）が必発。長期・過量投与で骨髄抑制や末梢神経障害。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>プロベネシド</h4></summary><div class="details-content"><h5>作用機序</h5><p>腎臓の近位尿細管における尿酸の再吸収を担う尿酸トランスポーター（URAT1）を阻害する。これにより、尿中への尿酸排泄を促進し、血中尿酸値を低下させる。</p><h5>適応疾患</h5><p>痛風、高尿酸血症。</p><h5>副作用</h5><p>消化器症状、発疹、尿路結石（尿が酸性だと生じやすい）。ペニシリンなど一部薬剤の排泄を遅延させる作用もある。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>アロプリノール</h4></summary><div class="details-content"><h5>作用機序</h5><p>尿酸を生成する最終段階の酵素であるキサンチンオキシダーゼ（XO）を阻害する。これにより、プリン体の代謝物であるキサンチンやヒポキサンチンから尿酸が産生されるのを抑制し、血中尿酸値を低下させる。</p><h5>適応疾患</h5><p>痛風、高尿酸血症。</p><h5>副作用</h5><p>発疹、食欲不振、肝機能障害。重篤な副作用として、中毒性表皮壊死融解症（TEN）や薬剤性過敏症症候群（DIHS）などの重症薬疹がある。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>ドチヌラド</h4></summary><div class="details-content"><h5>作用機序</h5><p>選択的尿酸再吸収阻害薬（SURI）。腎臓の尿酸トランスポーター（URAT1）を選択的に阻害し、尿中への尿酸排泄を促進することで血中尿酸値を低下させる。</p><h5>適応疾患</h5><p>痛風、高尿酸血症。</p><h5>副作用</h5><p>痛風関節炎、関節痛、四肢不快感。プロベネシド同様、尿路結石のリスクがある。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>クロモグリク酸ナトリウム</h4></summary><div class="details-content"><h5>作用機序</h5><p>アレルギー反応に関与する肥満細胞（マスト細胞）の細胞膜を安定化させる。これにより、抗原刺激による細胞からのヒスタミンなどの化学伝達物質の遊離を抑制する。</p><h5>適応疾患</h5><p>気管支喘息（発作予防）、アレルギー性鼻炎、アレルギー性結膜炎。</p><h5>副作用</h5><p>局所への刺激感（咳、鼻の刺激感など）。重篤な副作用は稀である。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>オロパタジン</h4></summary><div class="details-content"><h5>作用機序</h5><p>アレルギー症状の主因であるヒスタミンの作用を、ヒスタミンH₁受容体で競合的に拮抗する。加えて、化学伝達物質の遊離抑制作用も併せ持つ。</p><h5>適応疾患</h5><p>アレルギー性鼻炎、蕁麻疹、皮膚疾患に伴う掻痒。</p><h5>副作用</h5><p>眠気、倦怠感、口渇。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>メキタジン</h4></summary><div class="details-content"><h5>作用機序</h5><p>持続性のヒスタミンH₁受容体拮抗薬であり、抗アレルギー作用を示す。</p><h5>適応疾患</h5><p>気管支喘息、アレルギー性鼻炎、蕁麻疹、皮膚掻痒。</p><h5>副作用</h5><p>眠気、ふらつき、口渇。稀にショック、アナフィラキシー、肝機能障害、血小板減少。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>ペニシラミン</h4></summary><div class="details-content"><h5>作用機序</h5><p>キレート作用（金属イオンと結合する作用）と、免疫抑制作用を持つ。関節リウマチに対しては、免疫グロブリンやリウマトイド因子を減少させることで効果を示すとされる。</p><h5>適応疾患</h5><p>関節リウマチ、ウィルソン病（銅の排泄促進）、鉛・水銀中毒。</p><h5>副作用</h5><p>発疹、タンパク尿（ネフローゼ症候群）、骨髄抑制、味覚異常、自己免疫疾患の誘発。</p></div></details></article>
+            </section>
+            
+            <section>
+                <h2>悪性腫瘍及び関連疾患に作用する薬物</h2>
+                <article class="drug-card"><details><summary><h4>5-FU（フルオロウラシル）</h4></summary><div class="details-content"><h5>作用機序</h5><p>フッ化ピリミジン系代謝拮抗薬。体内で活性化され、DNA合成に必要なチミジル酸シンターゼを阻害し、またRNAにも取り込まれてその機能を障害する。</p><h5>適応疾患</h5><p>消化器がん（胃がん、大腸がんなど）、乳がん、頭頸部がんなど広範な固形がん。</p><h5>副作用</h5><p>骨髄抑制、重篤な下痢・口内炎などの粘膜障害、手足症候群、心毒性。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>ビンクリスチン</h4></summary><div class="details-content"><h5>作用機序</h5><p>微小管の重合を阻害し、細胞分裂に必要な紡錘体の形成を妨げることで、細胞をM期（分裂期）で停止させ、抗腫瘍効果を示す。</p><h5>適応疾患</h5><p>急性白血病、悪性リンパ腫、小児固形がん（ウィルムス腫瘍など）。</p><h5>副作用</h5><p>末梢神経障害（しびれ、便秘、イレウス）が用量規制因子となる。骨髄抑制は比較的軽い。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>パクリタキセル</h4></summary><div class="details-content"><h5>作用機序</h5><p>微小管の脱重合を阻害して異常に安定化させる。これにより正常な紡錘体機能が失われ、細胞分裂をM期で停止させる。</p><h5>適応疾患</h5><p>卵巣がん、非小細胞肺がん、乳がん、胃がん、食道がんなど。</p><h5>副作用</h5><p>骨髄抑制（特に好中球減少）、末梢神経障害、関節・筋肉痛、脱毛、重篤な過敏症。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>イリノテカン</h4></summary><div class="details-content"><h5>作用機序</h5><p>DNAの複製や転写の際に生じるDNAのねじれを解消する酵素、トポイソメラーゼIを阻害する。これによりDNA鎖の切断を引き起こし、がん細胞を死滅させる。</p><h5>適応疾患</h5><p>大腸がん、肺がん、胃がん、悪性リンパ腫。</p><h5>副作用</h5><p>重篤な下痢（早発性および遅発性）、骨髄抑制、悪心・嘔吐。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>セツキシマブ</h4></summary><div class="details-content"><h5>作用機序</h5><p>がん細胞の増殖に関わる上皮成長因子受容体（EGFR）に結合する分子標的薬（モノクローナル抗体）。EGFRの働きを阻害し、がん細胞の増殖を抑制する。</p><h5>適応疾患</h5><p>RAS遺伝子野生型の治癒切除不能な進行・再発の結腸・直腸がん、頭頸部がん。</p><h5>副作用</h5><p>ざ瘡様皮疹などの皮膚障害、infusion reaction（重篤なアレルギー様症状）、低マグネシウム血症。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>ニボルマブ</h4></summary><div class="details-content"><h5>作用機序</h5><p>免疫細胞（主にT細胞）表面のPD-1に結合し、がん細胞が発現するPD-L1/L2との結合を阻害する。これによりがん細胞による免疫抑制を解除し、T細胞ががんを攻撃する力を回復させる免疫チェックポイント阻害薬である。</p><h5>適応疾患</h5><p>悪性黒色腫、非小細胞肺がん、腎細胞がん、ホジキンリンパ腫、胃がんなど多数のがん種。</p><h5>副作用</h5><p>免疫関連有害事象（irAEs）と呼ばれる自己免疫疾患様の副作用（間質性肺炎、大腸炎、甲状腺機能障害、1型糖尿病など）。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>タモキシフェン</h4></summary><div class="details-content"><h5>作用機序</h5><p>選択的エストロゲン受容体モジュレーター（SERM）。乳腺組織ではエストロゲンの働きを妨げ（アンタゴニスト）、乳がん細胞の増殖を抑制する。一方、子宮内膜や骨に対してはエストロゲン様作用（アゴニスト）を示す。</p><h5>適応疾患</h5><p>乳がん（ホルモン受容体陽性）。</p><h5>副作用</h5><p>ほてり・のぼせなどの更年期様症状、子宮内膜増殖・子宮体がんのリスク増加、血栓塞栓症。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>アプレピタント</h4></summary><div class="details-content"><h5>作用機序</h5><p>嘔吐中枢にあるNK₁（ニューロキニン1）受容体を遮断し、嘔吐誘発物質であるサブスタンスPの作用を抑制する。</p><h5>適応疾患</h5><p>抗がん剤投与に伴う消化器症状（悪心、嘔吐）。特に遅発期の症状に有効。</p><h5>副作用</h5><p>しゃっくり、便秘、食欲不振、肝機能障害。</p></div></details></article>
+            </section>
+            
+            <section>
+                <h2>中枢神経・末梢神経系に作用する薬物</h2>
+                <article class="drug-card"><details><summary><h4>フェニトイン</h4></summary><div class="details-content"><h5>作用機序</h5><p>電位依存性Na⁺チャネルを、不活性化状態で遮断する。これにより神経細胞の過興奮を抑制し、強直間代発作などの発作を抑制する。</p><h5>適応疾患</h5><p>てんかん（強直間代発作、部分発作）、てんかん重積状態。</p><h5>副作用</h5><p>眼振、運動失調、歯肉増殖、多毛、発疹（重症薬疹を含む）、骨粗鬆症。治療域が狭く、血中濃度モニタリングが必要である。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>ジアゼパム</h4></summary><div class="details-content"><h5>作用機序</h5><p>中枢神経における主要な抑制性神経伝達物質であるGABAの受容体（GABAₐ受容体）に結合し、その働きを増強することで神経の興奮を鎮める。</p><h5>適応疾患</h5><p>不安・緊張、けいれん、てんかん、麻酔前投薬、筋緊張の緩和。</p><h5>副作用</h5><p>眠気、ふらつき、認知機能低下、長期使用による依存性・離脱症状。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>エチゾラム</h4></summary><div class="details-content"><h5>作用機序</h5><p>ベンゾジアゼピン系と同様にGABAₐ受容体に作用し、抗不安作用、催眠作用、筋弛緩作用を示す。チエノジアゼピン系に分類される。</p><h5>適応疾患</h5><p>神経症における不安・緊張・抑うつ・睡眠障害、心身症、頸椎症などにおける筋緊張・疼痛。</p><h5>副作用</h5><p>眠気、ふらつき、健忘、依存性。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>L-DOPA（レボドパ）</h4></summary><div class="details-content"><h5>作用機序</h5><p>パーキンソン病で欠乏するドパミンの前駆物質。血液脳関門を通過して脳内に入り、ドパミンに変換されて作用を発揮する。</p><h5>適応疾患</h5><p>パーキンソン病・パーキンソン症候群。</p><h5>副作用</h5><p>悪心・嘔吐、幻覚・妄想、ジスキネジア（不随意運動）、長期服用によるwearing-off現象（薬効時間の短縮）。通常、末梢での副作用を抑える脱炭酸酵素阻害薬と配合される。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>ドネペジル</h4></summary><div class="details-content"><h5>作用機序</h5><p>脳内のアセチルコリンを分解する酵素（アセチルコリンエステラーゼ）を選択的かつ可逆的に阻害し、アセチルコリン濃度を高めることで神経伝達を改善する。</p><h5>適応疾患</h5><p>アルツハイマー型認知症及びレビー小体型認知症における認知症症状の進行抑制。</p><h5>副作用</h5><p>消化器症状（吐き気、下痢、食欲不振）、徐脈、QT延長、攻撃性。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>モルヒネ</h4></summary><div class="details-content"><h5>作用機序</h5><p>中枢神経系に存在するμ（ミュー）オピオイド受容体に作動薬として結合し、強力な鎮痛作用を発揮する。</p><h5>適応疾患</h5><p>激しい疼痛（がん性疼痛など）の緩和、急性心筋梗塞における疼痛の緩和、麻酔補助。</p><h5>副作用</h5><p>便秘、悪心・嘔吐、眠気、呼吸抑制、精神的・身体的依存。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>コデイン</h4></summary><div class="details-content"><h5>作用機序</h5><p>モルヒネと同じくオピオイド受容体に作用するが、その作用は弱い。一部が体内でモルヒネに変換されて鎮痛作用を示す。延髄の咳中枢を直接抑制する鎮咳作用が主である。</p><h5>適応疾患</h5><p>疼痛（リン酸コデインとして）、鎮咳（リン酸コデイン、ジヒドロコデインとして）。</p><h5>副作用</h5><p>便秘、眠気、めまい。大量で呼吸抑制。CYP2D6の遺伝子多型により作用や副作用に個人差が大きい。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>ネオスチグミン</h4></summary><div class="details-content"><h5>作用機序</h5><p>可逆的なコリンエステラーゼ阻害薬。アセチルコリンの分解を抑制し、シナプス間隙のアセチルコリン濃度を高める。これにより、神経筋接合部や自律神経節の伝達を促進する。</p><h5>適応疾患</h5><p>重症筋無力症、術後の腸管麻痺・排尿障害、非脱分極性筋弛緩薬の拮抗。</p><h5>副作用</h5><p>コリン作動性クリーゼ（嘔吐、下痢、発汗、気道分泌過多、徐脈など）。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>アトロピン</h4></summary><div class="details-content"><h5>作用機序</h5><p>ムスカリン性アセチルコリン受容体を競合的に遮断する（抗コリン作用）。副交感神経の作用を抑制し、散瞳、心拍数増加、気道・消化管分泌抑制、消化管運動抑制などの作用を示す。</p><h5>適応疾患</h5><p>有機リン（サリンなど）中毒、徐脈性不整脈、麻酔前投薬（気道分泌抑制）、消化管の痙攣性疼痛。</p><h5>副作用</h5><p>口渇、便秘、排尿困難、頻脈、視調節障害（かすみ目）、せん妄。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>ロクロニウム</h4></summary><div class="details-content"><h5>作用機序</h5><p>神経筋接合部のニコチン性アセチルコリン受容体を、アセチルコリンと競合的に遮断する非脱分極性の筋弛緩薬である。</p><h5>適応疾患</h5><p>麻酔時の筋弛緩、気管挿管の補助。</p><h5>副作用</h5><p>アナフィラキシー、遷延性呼吸抑制。特異的拮抗薬としてスガマデクスがある。</p></div></details></article>
+            </section>
+            
+            <section>
+                <h2>神経ガス（化学兵器）</h2>
+                <article class="drug-card"><details><summary><h4>サリン</h4></summary><div class="details-content"><h5>作用機序</h5><p>有機リン系化合物。コリンエステラーゼを非可逆的に阻害する。これにより、分解されなくなったアセチルコリンが体内に過剰に蓄積し、ムスカリン受容体およびニコチン受容体を過剰に刺激し続ける。</p><h5>中毒症状</h5><p>縮瞳、気道分泌過多・気管支収縮による呼吸困難、嘔吐・下痢、徐脈、全身の痙攣、最終的には呼吸筋麻痺により死に至る。</p><h5>治療</h5><p>アトロピンによるムスカリン作用の拮抗、プラリドキシム（PAM）によるコリンエステラーゼの再賦活、ジアゼパムによる痙攣の抑制が三本柱である。</p></div></details></article>
+            </section>
+            
+            <section>
+                <h2>抗菌薬</h2>
+                
+                <h3>1. β-ラクタム系</h3>
+                <article class="drug-card"><details><summary><h4>アモキシシリン</h4></summary><div class="details-content"><h5>作用機序</h5><p>細菌の細胞壁を構成するペプチドグリカンの合成最終段階を担う酵素（ペニシリン結合タンパク質: PBP）に結合し、その活性を阻害する。これにより細胞壁合成が妨げられ、殺菌的に作用する。</p><h5>適応疾患</h5><p>呼吸器感染症、皮膚感染症、耳鼻咽喉科感染症、尿路感染症、ヘリコバクター・ピロリの除菌など、非常に広範な感染症。</p><h5>副作用</h5><p>下痢・軟便、発疹、重篤な副作用としてペニシリンショック（アナフィラキシー）、偽膜性大腸炎。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>セファゾリン</h4></summary><div class="details-content"><h5>作用機序</h5><p>第一世代のセフェム系注射抗菌薬。細胞壁合成を阻害する。グラム陽性球菌（ブドウ球菌、レンサ球菌など）に優れた抗菌力を示す。</p><h5>適応疾患</h5><p>皮膚・軟部組織感染症、呼吸器感染症、尿路感染症、術後感染予防。</p><h5>副作用</h5><p>ショック、アナフィラキシー、発疹、下痢、肝機能障害。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>セフメタゾール</h4></summary><div class="details-content"><h5>作用機序</h5><p>第二世代のセフェム系（セファマイシン系）注射抗菌薬。細胞壁合成を阻害する。嫌気性菌にも抗菌力を示すのが特徴。</p><h5>適応疾患</h5><p>腹腔内感染症、骨盤内感染症、呼吸器感染症。嫌気性菌が関与する混合感染症に有用。</p><h5>副作用</h5><p>出血傾向（ビタミンK産生抑制）、アルコールとの併用でジスルフィラム様作用（悪酔い）。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>セフトリアキソン</h4></summary><div class="details-content"><h5>作用機序</h5><p>第三世代のセフェム系注射抗菌薬。細胞壁合成を阻害する。グラム陰性桿菌に強い抗菌力を持ち、髄液移行性も良好。半減期が長く、1日1回の投与が可能である。</p><h5>適応疾患</h5><p>肺炎、肺膿瘍、髄膜炎、敗血症、淋菌感染症。</p><h5>副作用</h5><p>胆石・胆泥（偽胆石症）、下痢、発疹。新生児への使用は禁忌。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>セフェピム</h4></summary><div class="details-content"><h5>作用機序</h5><p>第四世代のセフェム系注射抗菌薬。細胞壁合成を阻害する。緑膿菌を含むグラム陰性桿菌およびグラム陽性球菌に広い抗菌スペクトルを持つ。</p><h5>適応疾患</h5><p>発熱性好中球減少症、敗血症、肺炎、尿路感染症などの重症・難治性感染症。</p><h5>副作用</h5><p>精神・神経症状（意識障害、痙攣、ミオクローヌスなど。特に腎機能障害患者で注意）、肝・腎機能障害。</p></div></details></article>
+
+                <h3>2. マクロライド系</h3>
+                <article class="drug-card"><details><summary><h4>クラリスロマイシン</h4></summary><div class="details-content"><h5>作用機序</h5><p>細菌のリボソーム50Sサブユニットに結合し、タンパク質の鎖長伸長を阻害することで静菌的に作用する。</p><h5>適応疾患</h5><p>呼吸器感染症、非結核性抗酸菌症、ヘリコバクター・ピロリの除菌。</p><h5>副作用</h5><p>消化器症状（下痢、腹痛）、味覚異常（苦味）、QT延長、肝薬物代謝酵素（CYP3A4）を強く阻害するため他剤との相互作用が多い。</p></div></details></article>
+                
+                <h3>3. アミノグリコシド系</h3>
+                <article class="drug-card"><details><summary><h4>アミノグリコシド系（クラス全般）</h4></summary><div class="details-content"><h5>作用機序</h5><p>細菌のリボソーム30Sサブユニットに結合し、タンパク質合成を阻害することで殺菌的に作用する。緑膿菌などに有効。</p><h5>適応疾患</h5><p>グラム陰性桿菌による重症感染症（敗血症、肺炎など）。</p><h5>副作用</h5><p>腎毒性（腎機能障害）、聴神経毒性（難聴、めまい）。血中濃度モニタリングが重要である。</p></div></details></article>
+                
+                <h3>4. キノロン系</h3>
+                <article class="drug-card"><details><summary><h4>キノロン系（クラス全般）</h4></summary><div class="details-content"><h5>作用機序</h5><p>細菌のDNA複製に必須な酵素であるDNAジャイレースなどを阻害し、殺菌的に作用する。経口薬でも高い組織移行性を示す。</p><h5>適応疾患</h5><p>呼吸器感染症、尿路感染症、腸管感染症など広範囲。</p><h5>副作用</h5><p>消化器症状、光線過敏症、痙攣、腱障害（アキレス腱断裂など）、大動脈瘤・解離、精神症状。</p></div></details></article>
+            </section>
+
+            <section>
+                <h2>消化器系に作用する薬物</h2>
+                <article class="drug-card"><details><summary><h4>シメチジン</h4></summary><div class="details-content"><h5>作用機序</h5><p>胃粘膜の壁細胞にあるヒスタミンH₂受容体を遮断し、胃酸分泌を抑制する。</p><h5>適応疾患</h5><p>胃潰瘍、十二指腸潰瘍、逆流性食道炎。</p><h5>副作用</h5><p>女性化乳房（抗アンドロゲン作用）、肝薬物代謝酵素（CYP）を阻害するため他剤との相互作用が多い。</p></div></details></article>
+                <article class="drug-card"><details><summary><h4>ラニチジン</h4></summary><div class="details-content"><h5>作用機序</h5><p>H₂受容体を遮断し、胃酸分泌を抑制する。シメチジンに比べ作用が強く、副作用も少ない。</p><h5>適応疾患</h5><p>胃潰瘍、十二指腸潰瘍、逆流性食道炎。</p><h5>副作用</h5><p>便秘、下痢、発疹。（注：現在、発がん性物質混入の可能性により多くの国で販売が停止されている）</p></div></details></article>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 医薬品情報リスト. この情報は参照用です。必ず専門家にご相談ください。</p>
+        </footer>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Animated <details> functionality
+    const summaries = document.querySelectorAll('summary');
+    summaries.forEach(summary => {
+        summary.addEventListener('click', (event) => {
+            // Prevent default instant open/close
+            event.preventDefault();
+            
+            const details = summary.parentElement;
+            const content = summary.nextElementSibling;
+            
+            if (!content) return; // Exit if there's no content
+
+            // Animate close
+            if (details.open) {
+                const contentHeight = content.scrollHeight;
+                // Set max-height to its current height, then transition to 0
+                requestAnimationFrame(() => {
+                    content.style.maxHeight = `${contentHeight}px`;
+                    requestAnimationFrame(() => {
+                        content.style.maxHeight = '0px';
+                    });
+                });
+                
+                // Remove 'open' attribute after the transition
+                content.addEventListener('transitionend', () => {
+                    details.removeAttribute('open');
+                }, { once: true });
+
+            // Animate open
+            } else {
+                details.setAttribute('open', '');
+                // Animate from 0 to its full scrollHeight
+                requestAnimationFrame(() => {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                });
+            }
+        });
+    });
+
+    // "Open All" / "Close All" buttons
+    const openAllBtn = document.getElementById('open-all');
+    const closeAllBtn = document.getElementById('close-all');
+    const allDetails = document.querySelectorAll('details');
+
+    openAllBtn.addEventListener('click', () => {
+        allDetails.forEach(details => {
+            if (!details.open) {
+                const summary = details.querySelector('summary');
+                // Simulate a click to trigger the opening animation
+                if(summary) summary.click();
+            }
+        });
+    });
+
+    closeAllBtn.addEventListener('click', () => {
+        allDetails.forEach(details => {
+            if (details.open) {
+                const summary = details.querySelector('summary');
+                // Simulate a click to trigger the closing animation
+                if(summary) summary.click();
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>
